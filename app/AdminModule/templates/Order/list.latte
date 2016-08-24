@@ -44,7 +44,7 @@
             <td>{$order->time_created|date:'%d.%m %H:%M:%S'}</td>
             <td><div data-column="person_name">{$order->person_name}</div></td>
             <td><div data-column="address">{$order->address}</div></td>
-            <td><a href="http://maps.google.com/?q={$order->address}" target="_blank"><img src="{$basePath}/images/admin/google-maps.png" /></a></td>
+            <td><a href="http://mapy.cz/?q={$order->address|url}" target="_blank"><img class="icon" src="{$basePath}/images/admin/mapy-icon.png" /></a></td>
             <td><div data-column="phone">{$order->phone}</div></td>
             <td>
 				<span style="display: none;">{if $order->zone_id}{$order->zone->title}{else}ŽŽ{/if}</span>

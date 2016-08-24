@@ -108,6 +108,11 @@ a {
   clear: both;
 }
 
+.icon {
+	width: 20px;
+	height: 20px;
+}
+
 /*** Navigace. ***/
 div.paraler-nav ul {
   margin: 0;

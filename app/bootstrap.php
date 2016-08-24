@@ -20,7 +20,8 @@ $configurator->setDebugMode(array('78.108.107.248',
 								  '89.103.182.50',
 								  '89.103.183.73',
 								  '212.20.99.253',
-								  '89.103.182.236')
+								  '89.103.182.236',
+								  '78.45.37.34')
 								 ); // enable for your remote IP
 $configurator->enableDebugger(__DIR__ . '/../log');
 
