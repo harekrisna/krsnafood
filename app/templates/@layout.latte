@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>{ifset title}{include title|striptags} | {/ifset}Kršna food</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Kršnafood">
+	<meta name="keywords" content="jídlo, vegetariánské obědy, rozvoz">
+	<meta name="author" content="Freezy & Vaija">
+	<meta name="robots" content="index, follow">
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/css/jquery-ui.css">
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Comfortaa:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	{block head}
+	{if $isMSIE || $isSafari}<link rel="stylesheet" href="{$basePath}/css/ie&safari.css">{/if}
+	{if $isMobile}<link rel="stylesheet" href="{$basePath}/css/mobile.css">{/if}
+	{/block}
+</head>
+<body>
+	<header>
+		<nav>
+			<ul id="left_side">
+				<li><a href="#menu_anchor">menu</a></li>
+			</ul>
+			<div id="logo"><img src="{$basePath}/images/layout/logo-clr.png" /></div>
+			<ul id="right_side">
+				<li><a href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">Restaurace MALÁ INDIE</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+ 	    <div n:foreach="$flashes as $flash" class="flash">{$flash->message}</div>
+		<div id="title_background"{if $parallax} style="background: none;" data-parallax="scroll" data-bleed="-10" data-image-src="{$basePath}/images/layout/bckgnd-vege.jpg"{/if}>
+			<section id="banner">
+				<span class="rozvoz_obedu">rozvoz obědů</span>
+				<p><span class="first_line">Nabízíme Vám </span>rozvoz zdravých<span class="third_line"> obědů přímo </span>až&nbsp;k&nbsp;Vašim dveřím v&nbsp;lokalitě <span class="fifth_line">Nové&nbsp;Město na Moravě a Žďár nad Sázavou.</span></p>
+				<span class="phone">723 835 095</span>
+				<a href="#menu_anchor" class="order">objednávka</a>
+			</section>
+			<div id="restaurant_info">restaurace <a href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">MALÁ INDIE: Malá 161, NMnM</a><br />otevřeno Po-Pá 11-14h</div>
+			</div>
+		</div>
+		<div id="welcome_background">
+			<section id="welcome">
+				<h2>Vítejte</h2>
+				<p>Zdravíme všechny zájemce o zajímavý oběd. Jedení jídla patří k důležitým činnostem dne a měla by mu být věnována určitá pozornost. To, co jíme, ovlivňuje nejen naše tělo, ale i náladu mysli. Proto bychom Vás chtěli pozvat do <a title="Klikněte pro mapu" href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">Malé Indie</a> (nebo k našemu objednávkovému formuláři pro rozvoz obědů&nbsp;:), abyste mohli vyzkoušet příjemnou alternativu. Naše umění vařit je inspirováno kulturou, jejíž praktikování je velice radostné.</p>
+				<img id="kotva" src="{$basePath}/images/layout/kanai-sig.png" />
+			</section>
+		</div>
+		<div id="menu_background"{if $parallax} style="background: none;" data-parallax="scroll" data-bleed="60" data-image-src="{$basePath}/images/layout/bckgnd-wood-dark.jpg"{/if}>
+			<div id="menu_anchor"></div>
+			<div id="menu_order_container">
+				<div id="centering">
+					<section id="menu">
+						<h2>Menu <span>{$menu_title}</span></h2>
+			            {foreach $menu_lunch as $day}
+			            <div class="menu-day">
+							<h3>{$day['abbr']}</h3>
+							<div{if $day['allergens']} class="flip-container" ontouchstart="this.classList.toggle('hover');"{/if}>
+								<div class="menu-leaf {if $today == $iterator->counter} today{else} day{/if}">
+									<div class="front">
+									{if $day['nocook']}
+					                	<div class="nocook" n:if="$day['nocook']">nevaříme</div>
+					                {else}
+					                    <ul>
+					                    {foreach $day['preparation'] as $preparation}
+					                        <li n:if="$preparation != ''">{!$preparation|unBold}</li>
+					                    {/foreach}
+					                    </ul>
+					                {/if}
+									</div>
+									<div n:if="$day['allergens']" class="back">
+										<div>Alergeny:</div>
+										{foreach $day['allergens'] as $allergen}{$allergen}{sep}, {/sep}{/foreach}
+									</div>
+								</div>
+							</div>
+			            </div>
+						{/foreach}
+						<div class="menu-day">
+							<div class="menu-leaf order">
+								<div>objednat<br />obědy</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<section id="order" class="opa">
+					<h2>Objednávka obědů</h2>
+					<div class="week-navigation-order">
+					{if $show_next_week}
+				        <div id="week-button-prev" class="week-button{if $start_slide == 0} actual{/if}"></div>
+					    <div class="triangle triangle-{$start_slide ? right : left}"></div> 
+						<div id="week-button-next" class="week-button{if $start_slide == 1} actual{/if}"></div>	
+				    {else}
+					    <div id="week-button-actual-order" class="week-button">{$week_title}</div>
+				    {/if}
+					</div>
+					
+				    {form orderForm}
+					<ul id="order_menu_container">
+						<li>
+							<table id="order-table" class="order-table">
+			                {foreach $lunch as $day}
+				                <tr>
+				                    <td class="day-circle"><div{if $today == $iterator->counter} class="today"{/if}>{$day['abbr']}</div></td>
+				                    <td>
+				                    {if $day['nocook']}
+				                        <span class="nocook">nevaříme</span>
+				                    {else}
+				                        <ul title="{foreach $day['allergens'] as $allergen}{first}Alergeny: {/first}{$allergen}{sep}, {/sep}{/foreach}">
+				                        {foreach $day['preparation'] as $preparation}
+				                            <li n:tag-if="$preparation != ''">{!$preparation|unBold}</li>
+				                        {/foreach}
+				                        </ul>
+				                    {/if}
+				                    </td>
+				                    {var $input = "this_week-{$day['name']}"}
+				                    <td class="count">{input $input}</td>
+				                    {if $day['nocook']}
+				                        <td class="input-arrows"></td>
+				                        <td class="day-count"><span class="closed"></span></td>
+				                    {elseif $day['disabled']}
+				                        <td class="input-arrows"></td>
+				                        <td class="day-count"><span class="closed">skončeno</span></td>
+				                    {else}
+                                        <td class="input-arrows"><div class="arrow-increase"></div><div class="arrow-decrease"></div></td>
+				                        <td class="day-count">
+				                            <div>porcí</div>
+				                            <div>(<span>0</span>,- Kč)</div>
+				                        </td>
+				                    {/if}
+				                </tr>
+			                {/foreach}
+							</table>
+						</li>
+						<li n:if="$show_next_week">
+							<table id="order-table-next" class="order-table">
+			                {foreach $lunch_next_week as $day}
+				                <tr>
+				                    <td class="day-circle"><div>{$day['abbr']}</div></td>
+				                    <td>
+				                    {if $day['nocook']}
+				                        <span class="nocook">nevaříme</span>
+				                    {else}
+				                        <ul title="{foreach $day['allergens'] as $allergen}{first}Alergeny: {/first}{$allergen}{sep}, {/sep}{/foreach}">
+				                        {foreach $day['preparation'] as $preparation}
+				                            <li n:tag-if="$preparation != ''"><span><span>{!$preparation|unBold}</span></span></li>
+				                        {/foreach}
+				                        </ul>
+				                    {/if}
+				                    </td>
+				                    {var $input = "next_week-{$day['name']}"}
+				                    <td class="count">{input $input}</td>
+				                    {if $day['nocook']}
+				                        <td class="input-arrows"></td>
+				                        <td class="day-count"><span class="closed"></span></td>
+				                    {else}
+				                        <td class="input-arrows"><div class="arrow-increase"></div><div class="arrow-decrease"></div></td>
+				                        <td class="day-count">
+				                            <div>porcí</div>
+				                            <div>(<span>0</span>,- Kč)</div>
+				                        </td>
+				                    {/if}
+				                </tr>
+			                {/foreach}
+							</table>
+						</li>
+					</ul>
+					<div id="order_form_container">
+						<div class="sum-label">cena<br />celkem</div>
+						<div id="sum-price"><span id="sum-price-label">0</span>,-</div>
+						<div>{input surname}{input address }{input phone }{input email }
+							<div class="styled-select">{input payment_type_id}</div>
+						</div>
+						{input remember_me}{label remember_me /}
+						<div class="order-button">OBJEDNAT</div>
+						<div id="return">ZPĚT</div>
+					</div>
+					<div class="footnote">*Objednávku na týž den je možno provést do <span class="bold">8:00 hod</span>. Přijímáme pouze stravenky Sodexo. Cena obědu <span class="bold">90 Kč.</span></div>
+					{/form}
+					{*
+					<div style="padding-top: 20px;color: #FFFFFF; box-shadow: -5px 10px 20px 20px rgba(0, 0, 0, 0.5); background-color: rgba(0, 0, 0, 0.5); border-radius: 50px 0 50px 0; height: 450px; margin-top: 50px;">
+						<h2>Haré Kršna<br />Dobrý den!</h2>
+						<p>Chtěli bychom Vás informovat, že ROZVOZ obědů v prosinci bude bohužel omezen, a to následovně:</p>
+						<br />
+						<p style="font-weight: bolder;">
+							7.12. - 25.12. nerozvážíme<br />
+							28.12. - 31.12. rozvážíme
+						</p>
+						<br />
+						<p>Omlouváme se za případné komplikace.</p>
+						<p>Zároveň však nebude přerušen provoz restaurace MALÁ INDIE v Novém Městě. (zavřeno bude pouze 24., 25.prosince a 1.1.2016)</p>
+						<p>Menu, které se bude vařit v restauraci, najdete zde na stránkách.</p>
+						<p>V restauraci si můžete také zakoupit oběd "<strong>s sebou</strong>". (Cena menu v restauraci i menu s sebou je 80,-)</p>
+						<br />
+						<p>Děkujeme za pochopení a těšíme se na viděnou!<br />
+						S pozdravem <br />
+						Badáňovi
+						</p>
+						<div id="return">Zpět na Menu</div>
+					</div>
+					*}
+				</section>
+			</div>
+		</div>
+		<div id="prasadam_background">
+			<section id="why_prasadam">
+				<h2>Proč Kršna Prasádam?</h2>
+				<p>„Kršna prasádam“ je sanskrtský výraz z tisíce let starých védských spisů. Doslova znamená milost Kršny. Vaříme podle tradičních zásad védské kultury, ke kterým například patří, že jídlo se za žádných okolností během vaření neochutnává. Po uvaření se nabídne Kršnovi a teprve poté se může jíst. Jedení takového jídla povznáší vědomí a očišťuje mysl. Je více než vhodné k utěšení našich každodenních starostí, natož pak na utěšení hladu samotného.</p>
+			</section>
+		</div>
+		<div id="contact_background"{if $parallax} style="background: none;" data-parallax="scroll" data-image-src="{$basePath}/images/layout/bckgnd-green.jpg"{/if}>
+		 	<div id="contact_container">
+				<table id="contact_table">
+					<tr>
+						<td class="social_sites">
+							<a href="http://www.facebook.com/sharer.php?u=http://www.krsnafood.cz" target="_blank" id="facebook">f</a>
+							<a href="http://plus.google.com/share?url=http://www.krsnafood.cz" target="_blank" id="google">g+</a>
+							<a href="http://twitter.com/share?url=http://www.krsnafood.cz" target="_blank" id="twitter">t</a>
+						</td>
+						<td class="kontakt"><a title="Klikněte pro mapu" href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">KONTAKT na provozovnu<br />Malá 161, Nové Město na Moravě 592 31</a>krsna.prasadam@gmail.com<br />+420 723 835 095<br />
+						</td>
+					</tr>
+					<tr>
+						<td class="about">&copy 2015 Kršna Prasádam,<br />design by rasika.sks<br />created by FreezY & Vity.mo</td>
+						<td class="adress"><img src="{$basePath}/images/layout/logo_white.png" alt="logo Krsna Prasadam" /><br />PROVOZOVATEL, FAKTURAČNÍ ÚDAJE: Jakub Badáň, Milná 15, Frymburk&nbsp;382&nbsp;26<br />Tel: +420 723 835 095<br />IČO: 02531054&nbsp;&nbsp;&nbsp;DIČ: CZ8606163258</td>
+					</tr>
+				</table>
+				<section id="form_box">
+						{form contactForm}
+						{control $form errors}
+						{input email }
+						{input name }
+						{input text }{input send}
+						{/form}
+				</section>						
+				<section id="mantra_box">Haré Kršna Haré Kršna Kršna Kršna Haré Haré Hare Ráma Hare Ráma Ráma Ráma Haré Haré</section> 
+			</div>	
+		</div>
+	</main> 
+	{block scripts}
+	<script>
+		var full_parallax = false;
+	</script>	
+	<script src="{$basePath}/js/jquery.min.js"></script>
+	<script src="{$basePath}/js/jquery-ui.min.js"></script>
+	<script src="{$basePath}/js/netteForms.js"></script>
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/js/contactForm.js"></script>
+	<script src="{$basePath}/js/orderForm.js"></script>
+	<script src="{$basePath}/js/jquery.bxslider.min.js"></script>
+	{if $parallax}<script src="{$basePath}/js/parallax.min.js"></script>{/if}
+	<script>
+	$(document).tooltip({
+		position: { my: "left+10 top-10"}
+	});
+	
+    $('#order_menu_container').bxSlider({
+      nextSelector: '#week-button-next',
+      prevSelector: '#week-button-prev',
+      nextText: {$next_week_title},
+      prevText: {$week_title},
+      infiniteLoop: false,
+      hideControlOnEnd: true,
+      pager: false,
+	  slideWidth: 790,
+	  startSlide: {$start_slide},
+      onSlideNext: function($slideElement, oldIndex, newIndex){
+		$('#week-button-prev a').animate({
+			color: '#C5BA4C',
+		}, 500);
+		$('#week-button-next a').animate({
+			color: '#fae9b7'
+		}, 500);
+        $("div.triangle").toggleClass("rotate-triangle");
+      }, 
+      onSlidePrev: function($slideElement, oldIndex, newIndex){
+		$('#week-button-prev a').animate({
+			color: '#fae9b7'
+		}, 500);
+		$('#week-button-next a').animate({
+			color: '#C5BA4C'
+		}, 500);
+        $("div.triangle").toggleClass("rotate-triangle");
+      },
+      onSliderLoad: function(){
+        $('#order-menu-container').css("visibility", "visible");
+      }
+    });
+
+	</script>
+	{/block}
+</body>
+</html>

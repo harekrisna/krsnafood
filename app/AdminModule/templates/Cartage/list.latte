@@ -1,0 +1,29 @@
+{block title}Adresy rozvozů{/block}
+{block left-column}
+{/block}
+{block content}
+<h1>Rozvozy</h1>
+<table id="cartage" class="view">
+    <thead>
+      <tr>
+        <th><span>Id</span></th>
+        <th><span>Jméno</span></th>
+        <th><span>Zkratka</span></th>
+      </tr>
+    </thead>
+    <tbody>
+	{foreach $cartages as $cartage}
+        <tr>
+            <td>{$cartage->id}</td>
+            <td>{$cartage->cartage_name}</td>
+            <td>{$cartage->abbreviation}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>
+
+{/block}
+{block scripts}
+{include parent}
+{/block}
+

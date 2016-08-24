@@ -1,0 +1,53 @@
+{block title}Editace preparace{/block}
+{block content}
+<h1>Preparace</h1>
+<fieldset id="preparations-list">
+<legend>
+<div>Kategorie:</div>
+{form chooseCategoryForm}
+{input category_id}
+{/form}
+</legend>
+{foreach $preparations as $preparation}
+    <div data-id="{$preparation->id}">
+        {$preparation->title}
+        <a class="remove" n:href="removePreparation!, $preparation->id"></a>
+        <a class="edit" n:href="editPreparation, $preparation->id"></a>
+    </div>
+{/foreach}
+</fieldset>
+<fieldset id="new-preparation">
+<legend>Editace preparace:</legend>
+{form preparationForm}
+<table>
+<tr><th>{label title /}</th><td>{input title}</td></tr>
+<tr><th>{label category_id /}</th><td>{input category_id}</td></tr>
+<tr><th></th><td>{input update}</td></tr>
+</table>
+{/form}
+</fieldset>
+{form allergensForm}
+<fieldset id="allergen-form">
+<legend>{label allergens /}</legend>
+	{input allergens}
+</fieldset>
+{/form}
+<div class="backstop"></div>
+{/block}
+{block scripts}
+{include parent}
+<script>
+	$('input[type=checkbox]').change(function() {
+		if(this.checked) {
+			$.get({link setAllergenToPreparation!}, { "preparation_id": {$preparation_id},
+					                                  "allergen_id": this.value }
+			);
+		}
+		else {
+			$.get({link unsetAllergenToPreparation!}, { "preparation_id": {$preparation_id},
+					                                    "allergen_id": this.value }
+			);
+		}
+	});
+</script>
+{/block}

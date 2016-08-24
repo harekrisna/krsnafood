@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{ifset title}{include title|striptags} | {/ifset}Kršna food</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Kršnafood mňamky">
+	<meta name="keywords" content="jídlo, vegetariánské obědy, rozvoz">
+	<meta name="author" content="Freezy & Vaija">
+	<meta name="robots" content="noindex, nofollow">
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/css/style_full_parallax.css">
+	{if $isChrome}<link rel="stylesheet" href="{$basePath}/css/style_fp-chrome.css">{/if}
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Comfortaa:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	{block head}{/block}
+</head>
+<body>
+	<header>
+		<nav>
+			<ul id="navigation">
+				<li><a href="http://www.krsnafood.cz/?test=1">flat</a></li>
+				<li><a href="http://www.krsnafood.cz/?parallax=1&amp;test=1">parallax</a></li>
+				<li><a href="http://www.krsnafood.cz/homepage/full-parallax?test=1">full parallax</a></li>
+			</ul>
+			<div id="logo"><img src="{$basePath}/images/layout/logo-clr.png" /></div>
+			<ul id="account">
+				<li><a href="#">přihlásit</a></li>
+				<li><a href="#">zaregistrovat</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+	 	<div n:foreach="$flashes as $flash" class="flash">{$flash->message}</div>
+		<div class="parallax-group" id="title_group">
+			<div class="parallax-layer" id="title_foreground">
+				<section id="banner">
+					<span class="rozvoz_obedu">rozvoz obědů</span>
+					<p>Nabízíme vám dobré jídlo z jídelny Kanáje Thákura, abyste nemuseli pořád žrát ty sračky z mekáče.</p>
+					<span class="phone">777 123 456</span>
+					<span class="order">objednávka</span>
+				</section>
+			</div>
+			<div class="parallax-layer" id="title_background"></div>
+		</div>
+		<div class="parallax-group" id="welcome_group">
+			<div id="welcome_background">
+				<section id="welcome">
+					<h2>Vítejte</h2>
+					<p>Vítejte na našich super stránkách, Rásika je strašnej suchar a nedokáže sem vymyslet nic jinýho než Lorem Ipsum dolor sit amet, což je pěkně nudný. Dá se sem dát cokoliv, ale já taky přesně nevim co, asi sem dáme to že jsme fakt dobrý a že kánáj je dobrej kuchař a mistr indické kuchyně, no doufám že nám to zbaštěj. Ještě jeden řádek, bla bla...</p>
+					<img id="kotva" src="{$basePath}/images/layout/kanai-sig.png" />
+				</section>
+			</div>
+		</div>
+		<div class="parallax-group" id="menu_group">
+			<div class="parallax_layer" id="menu_foreground">
+				<section id="menu">
+					<h2>Menu <span>13. - 18. 6. 2015</span></h2>
+					<div class="menu-leaf day">
+						<h3>Po</h3>
+						<ul>
+							<li>kičrí (mung-dál, rýže, zelenina)</li>
+							<li>chipsy (smažené pečivo)</li>
+							<li>sladkost</li>
+						</ul>
+					</div>
+					<div class="menu-leaf today">
+						<h3>Út</h3>
+						<ul>
+							<li>Subji (květák, kapustičky,koftičky z červené řepy ve smetanové omáčce)</li>
+							<li>tarhoňa</li>
+							<li>dhal (luštěninová polévka)</li>
+						</ul>
+					</div>
+					<div class="menu-leaf day">
+						<h3>St</h3>
+						<ul>
+							<li>subji (fazolky, paprika v rajské omáčce)</li>
+							<li>pohanka</li>
+							<li>alu patra (bramborové smaženky)</li>
+						</ul>
+					</div>
+					<div class="menu-leaf day">
+						<h3>Čt</h3>
+						<ul>
+							<li>sabji (brambor, cuketa, panýr, rajče)</li>
+							<li>jasmínová rýže</li>
+							<li>kofta z červeného zelí</li>
+						</ul>
+					</div>
+					<div class="menu-leaf day">
+						<h3>Pá</h3>
+						<ul>
+							<li>sabji (bešamel, hrášek, květák)</li>
+							<li>rýže s hořčičným semínkem</li>
+							<li>katmir vada (smaženost z cizrnové mouky se špenátem)</li>
+						</ul>
+					</div>
+					<div class="menu-leaf order">
+						<a href="#">objednat<br />obědy</a>
+					</div>
+				</section>
+			</div>
+			<div class="parallax-layer" id="menu_background"></div>
+		</div>
+		<div class="parallax-group" id="about_group">
+			<div id="about_background">
+				<section id="why_prasadam">
+					<h2>Proč Kršna Prasádám?</h2>
+					<p>Takže opět místo trapného Rasikánadového Lorem Ipsum sem musim dát něco lepšího, takže proč kršna prasádám. Protože Kršna prasádám je mňam mňam mňami mňam, a Kršna je prostě nejlepší, a když to od nás nebudete kupovat, tak půjdete do pekla, to je jasný. No hlavně že je tady něco napsanýho, stejně sem kanáj dá něco jinýho, ale budem si na to asi muset dlouho počkat, ale tohle je vlastně docela dobrý co, tak to tady nechám...</p>
+				</section>
+			</div>
+		</div>
+		<div class="parallax-group" id="contact_group">
+				<div class="parallax-layer" id="contact_background"></div>
+				<div id="contact_container">
+				<table id="contact_table">
+					<tr>
+						<td class="social_sites">
+							<div id="facebook">f</div>
+							<div id="google">g+</div>
+							<div id="twitter">t</div>
+						</td>
+						<td class="kontakt">KONTAKT<br />krsna.prasadam@gmail.com<br />+420 723 835 095<br />
+							
+						</td>
+					</tr>
+					<tr>
+						<td class="about">&copy 2015 Kršna Prasádam,<br />design by Rasika<br />created by FreezY & Vaija</td>
+						<td class="adress"><img src="{$basePath}/images/layout/logo_white.png" alt="logo Krsna Prasadam" /><br />Rozvoz vegetariánských obědu<br />Malá 169, Nové Město N. M.<br />IČO 02531054</td>
+					</tr>
+				</table>
+				<section id="form_box">
+						{form contactForm}
+						{control $form errors}
+						{input email }
+						{input name }
+						{input text }{input send}
+						{/form}
+				</section>						
+				<section id="mantra_box">Haré Kršna Haré Kršna Kršna Kršna Haré Haré Hare Ráma Hare Ráma Ráma Ráma Haré Haré</section> 
+			</div>	
+		</div>
+	</main> 
+	{block scripts}
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//nette.github.io/resources/js/netteForms.min.js"></script>
+	<script src="{$basePath}/js/contactForm.js"></script>
+	<script>
+		var full_parallax = true;
+	</script>
+	<script src="{$basePath}/js/main.js"></script>
+	
+	{/block}
+</body>
+</html>

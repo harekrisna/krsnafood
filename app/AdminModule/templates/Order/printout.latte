@@ -1,0 +1,69 @@
+{block title}Náhled objednávek pro tisk{/block}
+{block content}
+{var payment_trans = array("hotově" => "cash",
+						   "na účet" => "účet",
+						   "fakturou" => "fa",	
+						   "poukázkou" => "po",	
+						  )}
+<style type="text/css">
+@page {
+  size: auto;   /* auto is the initial value */
+  margin: 45px 20px 65px 20px;
+}
+
+body{
+  -webkit-print-color-adjust:exact;
+}
+</style>
+{foreach $cartages as $cartage}
+	{continueIf $cartage->count() == 0}
+<table class="printout">
+<thead>
+	<tr>
+		<th style="width: 30px;">Poč</th>
+		<th style="width: 230px;">Jméno</th>
+		<th style="width: 30px;">Poč</th>
+		<th style="width: 85px;">Telefon</th>
+		<th>Adresa</th>
+		<th style="width: 40px;">Loc</th>
+		<th style="width: 30px;">Plat</th>
+		<th style="width: 30px;">Roz</th>
+	</tr>
+</thead>
+<tbody>
+{foreach $cartage as $order}
+	<tr>
+		<td>{$order->lunch_count}</td>
+		<td>{$order->person_name}</td>
+		<td>{$order->lunch_count}</td>
+	    <td>{$order->phone}</td>
+		<td>{$order->address}</td>
+		<td>{if $order->zone_id}{$order->zone->title}{/if}</td>
+		<td>{if $order->payment_type_id}{$payment_trans[$order->payment_type->type]}{/if}</td>		
+		<td>{ifset $order->cartage->cartage_name}{$order->cartage->abbreviation}{/ifset}</td>
+	</tr>
+{/foreach}
+</tbody>
+<tr class="last">
+	<td colspan="7"></td>
+	<td>{$cartage->sum("lunch_count")}</td>
+</tr>
+</table>
+{if !$iterator->last}<div class="padding-resizer"></div>{/if}
+{/foreach}
+<div id="lunch_sum">Celkem obědů: {$lunch_sum}</div>
+<div style="text-align: center;">
+<input type="button" id="print_button" onClick="window.print()" value="Tisk" />
+</div>
+  <script>      
+  
+  $(function(){
+	  $('.printout').editableTableWidget();  
+	  $(".printout tbody").sortable();
+  });
+  
+  </script>
+{/block}  
+
+
+

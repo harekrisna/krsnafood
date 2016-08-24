@@ -1,0 +1,37 @@
+#menu .flip-container .menu-leaf {
+	transition: 0;
+	-webkit-transition: 0;
+	-ms-transition: 0;
+}
+
+.flip-container:hover .menu-leaf, .flip-container.hover .menu-leaf {
+	transform: inherit;
+	-webkit-transform: inherit;
+	-ms-transform: inherit;
+}
+
+.flip-container .menu-leaf .back {
+	visibility: hidden;
+}
+
+#menu .flip-container .day:hover {
+	background: url('../images/layout/menu-week-flip.png') right center no-repeat;
+}
+
+#menu .flip-container .today:hover {
+	background: url('../images/layout/menu-today-flip.png') right center no-repeat;
+}
+
+#menu .flip-container .day:hover .back, #menu .flip-container .today:hover .back {
+	visibility: visible;
+	transform: inherit;
+	-webkit-transform: inherit;
+	-ms-transform: inherit;
+}
+
+#menu .flip-container .day:hover .front,#menu .flip-container .today:hover .front {
+	visibility: hidden;
+	transform: inherit;
+	-webkit-transform: inherit;
+	-ms-transform: inherit;
+}

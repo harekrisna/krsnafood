@@ -1,0 +1,43 @@
+#order_form_container input[type=text], #order_form_container select {
+	width: 140px;
+}
+
+.order-button {
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+div#menu_order_container {
+	width: 980px;
+}
+
+section#order {
+	width: 970px;
+	margin-left: 10px;
+}
+
+div#order_form_container {
+	width: 175px;
+	margin-left: 5px;
+	margin-top: -10px;
+}
+
+#order_form_container input[name=surname] {
+  margin-top: 10px;
+}
+
+div#return {
+	margin: 5px 55px 0 0;
+}
+
+.sum-label {
+	float: none;
+	margin: 0;
+	margin-left: -5px;
+	text-align: center;
+}
+
+#sum-price {
+	margin-top: 10px;
+	margin-left: 40px;
+}

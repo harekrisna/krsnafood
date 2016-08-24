@@ -1,0 +1,37 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# http://nette.org/security-warning
+#
+parameters:
+
+
+php:
+	date.timezone: Europe/Prague
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	- App\AdminModule\Model\UserManager
+	- App\Forms\SignFormFactory
+	router: App\RouterFactory::createRouter
+	menu: App\Model\Menu
+	date: App\AdminModule\Model\Date
+	preparations: App\AdminModule\Model\Preparations
+	lunchPreparation: App\AdminModule\Model\LunchPreparation
+	category: App\AdminModule\Model\Category
+	allergen: App\Model\Allergen
+	preparationAllergen: App\Model\PreparationAllergen
+	order: App\Model\Order
+	address: App\Model\Address
+	cartage: App\AdminModule\Model\Cartage
+	zone: App\AdminModule\Model\Zone
+	paymentType: App\Model\PaymentType

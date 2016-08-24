@@ -1,0 +1,15 @@
+main {
+  	height: 127vh;
+}
+
+#title_background {
+	-ms-transform: translateZ(-0.50px) translateY(-140px) scale(1.51);
+	-webkit-transform: translateZ(-0.50px) translateY(-140px) scale(1.51);
+	transform: translateZ(-0.50px) translateY(-140px) scale(1.51);
+}  
+
+#menu_background {
+	-ms-transform: translateZ(-0.50px) translateY(-100px) scale(1.51);
+	-webkit-transform: translateZ(-0.50px) translateY(-100px) scale(1.51);
+	transform: translateZ(-0.50px) translateY(-100px) scale(1.51);
+} 

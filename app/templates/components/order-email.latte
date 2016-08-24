@@ -1,0 +1,132 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Potvrzení objednávky obědů</title>
+    <style>
+
+h1.menu-title-order {
+  font-size: 20px;
+  margin: 20px 0px 20px 0px;
+}
+
+table#order-table {
+  width: 650px;
+  margin-left: 10px;
+  color: #663200;
+  margin-bottom: 50px;
+}
+
+#order-table tr {
+    height: 60px;
+}
+
+#order-table td.count {
+    width: 120px;
+    text-align: left;
+    padding-left: 40px;
+    font-size: 13px;
+}
+
+
+#order-table td div {
+  width: 32px;
+  color: #FFFFFF;
+  font-size: 18px;
+  border-radius: 150px;
+  height: 28px;
+  padding: 5px 0px 0px 1px;
+  text-align: center;
+  display: block;
+  float: left;
+  background-color: #999933; 
+  margin-top: -15px;
+}
+
+#order-table ul {
+    padding-left: 16px;
+    padding-bottom: 2px;
+}
+
+#order-table ul li {
+    text-align: left;
+    list-style: disc;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+#order-table td.underline {
+    border-bottom: 1px #663200 solid;
+}
+
+#order-table td.sum {
+    width: 100px;
+    vertical-align: top;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    border-top: 1px #663200 solid;
+}
+
+    </style>
+</head>
+<body>
+    <p>Dobrý den,</p>
+    <p>Vaše objednávka obědů Kršna Prasádam byla přijata.</p>
+    <table>
+        <tr><td style="width: 50px;">Jméno:</td><td>{$surname}</td></tr>
+        <tr><td>Adresa:</td><td>{$address}</td></tr>
+        <tr><td>Telefon:</td><td>{$phone}</td></tr>
+        {if $email != ""}<tr><td>e-mail:</td><td>{$email}</td></tr>{/if}
+        <tr n:if="$payment_type"><td>Typ platby:</td><td>{$payment_type}</td></tr>
+    </table>
+    
+  <table id="order-table">
+    {if $this_week_amount > 0}
+    <tr>
+        <td colspan="3"><h1 class="menu-title-order">{$week_title}</h1></td>
+    </tr>
+    {foreach $this_week as $day}
+    <tr>
+        <td><div>{$day['abbr']}</div></td>
+        <td>
+            <ul>
+            {foreach $day['preparation'] as $preparation}
+                <li n:tag-if="$preparation != ''">{$preparation}</li>
+            {/foreach}
+            </ul>
+        </td>
+        <td class="count">{$day['amount']} porcí ({$day['price']},- Kč)</td>
+    </tr>
+    {/foreach}
+    {/if}
+
+    {if $next_week_amount > 0}
+    <tr>
+        <td colspan="3" style="height: 100px; vertical-align: bottom;"><h1 class="menu-title-order">{$next_week_title}</h1></td>
+    </tr>
+    {foreach $next_week as $day}
+    <tr>
+        <td><div>{$day['abbr']}</div></td>
+        <td>
+            <ul>
+            {foreach $day['preparation'] as $preparation}
+                <li n:tag-if="$preparation != ''">{$preparation}</li>
+            {/foreach}
+            </ul>
+        </td>
+        <td class="count">{$day['amount']} porcí ({$day['price']},- Kč)</td>
+    </tr>
+    {/foreach}
+    {/if}
+    <tr>
+	  	<td></td>
+	  	<td></td>
+	  	<td class="sum">Cena celkem:<br />{$total_price},- Kč</td>
+    </tr>
+</table>
+<hr />
+Kršna Prasádam
+</div>   
+</body>
+</html>

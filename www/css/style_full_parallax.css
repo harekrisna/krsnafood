@@ -1,0 +1,121 @@
+body {
+	  overflow: hidden;
+	  background: url('../images/layout/bckgnd-green.jpg') repeat;
+	  background-size: 150%;
+}
+
+/* parallax layers */
+
+.parallax-group {
+  position: relative;
+  -ms-transform: preserve-3d;
+  -webkit-transform: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#title_group {
+  height: 530px;	
+}
+
+#welcome_group {
+  height: 480px;
+  z-index: 10;
+}
+
+#menu_group {
+  height: 550px;
+z-index: -10;
+}
+
+#about_group {
+  height: 480px;
+  z-index: 10;
+}
+
+#contact_group {
+  height: 350px;
+  z-index: -10;
+}
+
+main {
+  	perspective: 1px;
+  	height: 100vh;
+  	overflow-x: hidden;
+  	overflow-y: auto;
+}
+
+.parallax-layer {
+  	position: absolute;
+  	top: 0; right: 0; bottom: 0; left: 0;
+}
+
+#title_foreground {
+    -ms-transform: translateZ(0.20px) scale(0.80);
+    -webkit-transform: translateZ(0.20px) scale(0.80);
+    transform: translateZ(0.20px) scale(0.80);
+   	background: url('../images/layout/title-label.png') top center repeat-x;
+	width: 700px;
+	margin: 0 auto;
+	margin-top: 17%;
+	height: 268px;
+}
+
+#title_background {
+	-ms-transform: translateZ(-0.50px) translateY(-90px) scale(1.51);
+	-webkit-transform: translateZ(-0.50px) translateY(-90px) scale(1.51);
+	transform: translateZ(-0.50px) translateY(-90px) scale(1.51);
+	background: url('../images/layout/bckgnd-vege.jpg') top center repeat;
+	height: 530px;
+	z-index: -1;
+	padding-top: 0px;
+}  
+
+#welcome_background {
+	background: url('../images/layout/frgnd-upper.png') center center repeat-x;
+	width: 100%;
+	height: 480px;
+}
+
+#menu_foreground {
+    -ms-transform: translateZ(0.20px) scale(0.80);
+    -webkit-transform: translateZ(0.20px) scale(0.80);
+    transform: translateZ(0.20px) scale(0.80);
+	width: 95%;
+	max-width: 750px;
+	margin: 0 auto;
+	height: 400px;
+	padding-top: 20px;
+}
+
+#menu_background {
+	-ms-transform: translateZ(-0.50px) translateY(-50px) scale(1.51);
+	-webkit-transform: translateZ(-0.50px) translateY(-50px) scale(1.51);
+	transform: translateZ(-0.50px) translateY(-50px) scale(1.51);
+	background: url('../images/layout/bckgnd-wood.jpg') center center repeat;
+	background-size: 100%;
+	height: 750px !important;
+	z-index: -1;
+}
+
+#about_background {
+	background: url('../images/layout/frgnd-lower.png') center center repeat-x;
+	width: 100%;
+	height: 480px;
+}
+
+#contact_foreground {
+	width: 700px;
+	height: 340px;
+	margin: 0 auto;
+	background-color: rgba(188,0,0,0.70);
+}
+
+#contact_background {
+	-ms-transform: translateZ(-0.50px) translateY(120px) scale(1.56);
+	-webkit-transform: translateZ(-0.50px) translateY(120px) scale(1.56);
+	transform: translateZ(-0.50px)	translateY(120px) scale(1.56);
+	background: url('../images/layout/bckgnd-green.jpg') center center repeat;
+	background-size: 100%;
+	height: 500px;
+	z-index: -1;
+} 
