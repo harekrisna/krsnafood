@@ -186,7 +186,7 @@ div#restaurant_info {
 	font-family: 'Lora', serif;
 	border-radius: 20px 0 20px 0;
 	margin: 0 auto;
-	width: 450px;
+	width: 570px;
 	height: 55px;
 	background-color: #E64723;
 	color: #FFFFFF;
@@ -994,6 +994,8 @@ section#mantra_box {
 	width: 300px;
 	height: 90px;
 	padding-left: 30px;
+	padding-top: 15px;
+	padding-bottom: 0;
 	vertical-align: top;
 }
 
@@ -1046,6 +1048,17 @@ section#mantra_box {
 	line-height: 45px;
 	font-size: 35px;
 	
+}
+
+.email-tel {
+	margin-top: 10px;
+	letter-spacing: 2px;
+	font-size: 16px;
+	line-height: 30px;
+}
+
+.email-tel a {
+	color: inherit;
 }
 
 #form_box form *{
