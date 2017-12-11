@@ -74,12 +74,18 @@ ul#left_side li{
 
 header ul#right_side {
 	width: 230px;
+	padding-top: 50px;
 	float:right;
 }
+
 
 header ul#right_side li {
 	width: 100px;
 	margin-top: -20px;
+}
+
+header ul#right_side li .facebook-icon{
+	width: 50px;
 }
 
 header ul#right_side li:first-child a{
@@ -134,7 +140,7 @@ section#banner {
 
 #banner p {
 	position: absolute;
-	top: 40px;
+	top: 28px;
 	left: 277px;
 	width: 190px;
 	text-align: center;
@@ -235,7 +241,7 @@ section#welcome {
 }
 
 #welcome img {
-	margin-top: 10px;
+	margin-top: -10px;
 	margin-left: 230px;
 	float: left;
 	height: 41px;
@@ -278,7 +284,7 @@ div#menu_order_container {
 section#menu {
 	width: 730px;
 	height: 550px;
-	margin-top: 30px;
+	margin-top: 45px;
 	position: absolute;
 	visibility: visible;
 	transition: all 0.7s;
@@ -480,6 +486,7 @@ section#menu.opa {
 
 section#order {
 	width: 1100px;
+	margin-top: 30px;
 	margin-left: 25px;
 	position: absolute;
 	visibility: visible;

@@ -59,7 +59,7 @@ class HomepagePresenter extends BasePresenter
             	
             $deadline = $this->menu->strtotime("{$day} this week ".$time_deadline);
             
-            if($deadline - $now < 0 || $lunchs[$day]['nocook'] == 1) {
+            if($deadline - $now < 0 || $lunchs[$day]['nocook'] == 1/* || $lunchs[$day]['limit'] == 0*/) {
                 $this['orderForm']['this_week'][$day]->setDisabled();
                 $lunchs[$day]['disabled'] = true;
             }    
@@ -156,6 +156,8 @@ class HomepagePresenter extends BasePresenter
             		  ->setAttribute('autocomplete', 'off');        
         }
         
+		$form->addHidden('timestamp', time());
+		
         $container = $this->presenter->context->getService("container");
 		$httpRequest = $container->getByType('Nette\Http\Request');
 	    $remember_me = $httpRequest->getCookie('remember_me');
@@ -186,6 +188,21 @@ class HomepagePresenter extends BasePresenter
         $this_week_amount = 0;
         $next_week_amount = 0;
 
+		// test zda byl formulář vygenerován před dedlineam a potvrzen po deadlinu
+		$deadline_time = strtotime("08:00:00");
+		$generated_time = $values->timestamp;
+		$actual_time = time();
+		
+		// test zda byl formulář vygenerovám ve stejný týdem, chyba nastávala když byl formulář vygenerován v neděli a potvrzev v pondělí
+		$generated_week = date("W", $generated_time);
+		$actual_week = date("W", $actual_time);
+	
+		if((($deadline_time < $actual_time) && ($deadline_time > $generated_time)) || ($generated_week != $actual_week)) {
+	        $this->flashMessage('Platnost formuláře vypršela.<br />Vaše objednávka nebyla zpracována!', 'error');
+	        $this->redirect('default');
+	        $this->terminate();
+		}
+		
     	// kontrola, za adresa jiz exxistuje
         $address = $this->address->findBy(array("address_stamp" => $this->address->generateStamp($values['address'])));       
 		
@@ -205,7 +222,43 @@ class HomepagePresenter extends BasePresenter
         }
 		        
 	    $lunchs = $this->menu->getWeekLunchs();
-            
+        
+        /* omezovač obědů
+        foreach ($values['this_week'] as $day => $amount) {
+           if($amount == 0 || $amount == "")
+               continue;
+
+           $lunch = $this->menu
+                         ->findBy(array("lunch_date" => $this->menu->getWeekDayDate($day, 0)))
+                         ->fetch();
+           
+		   $order = $this->order->findBy(['lunch_id' => $lunch->id]);
+           
+		   if($order->sum('lunch_count') >= 50) {
+			   $this->flashMessage('Vaše objednávka nebyla přijata. Byl překročen maximální počet obědů', 'error');
+			   $this->redirect('default');
+		   }
+        }
+
+        foreach ($values['next_week'] as $day => $amount) {
+           if($amount == 0 || $amount == "")
+               continue;
+           
+           $lunch = $this->menu
+                         ->findBy(array("lunch_date" => $this->menu->getWeekDayDate($day, 1)))
+                         ->fetch();
+           
+           $order = $this->order->findBy(['lunch_id' => $lunch->id]);
+           
+           Debugger::fireLog($order->sum('lunch_count'));
+           
+		   if($order->sum('lunch_count') >= 50) {
+			   $this->flashMessage('Vaše objednávka nebyla přijata. Byl překročen maximální počet obědů', 'error');
+			   $this->redirect('default');
+		   }
+        }
+		*/
+        
         foreach ($values['this_week'] as $day => $amount) {
            if($amount == 0 || $amount == "")
                continue;
@@ -213,7 +266,7 @@ class HomepagePresenter extends BasePresenter
            $lunch = $this->menu
                          ->findBy(array("lunch_date" => $this->menu->getWeekDayDate($day, 0)))
                          ->fetch();
-           
+		  
            $this->order->insert(array('id' => NULL,
 									  'person_name' => $values['surname'],
 									  'address' => $values['address'],

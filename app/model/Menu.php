@@ -107,6 +107,7 @@ class Menu extends Table   {
 	             $lunch[$day]['preparation'][$i] = "";
 	        }
 	        $lunch[$day]['allergens'] = array();
+	        $lunch[$day]['limit'] = 50;
 	    }
 	    
 	    
@@ -118,6 +119,13 @@ class Menu extends Table   {
 	        $lunch[$day]['id'] = $lunch_row->id;
 	        $lunch[$day]['date'] = $lunch_row->lunch_date;
 	        $lunch[$day]['nocook'] = $lunch_row->nocook;
+		    $lunch[$day]['limit'] = 50 - $lunch_row->related("order")->sum('lunch_count');
+		    
+		    if($lunch[$day]['limit'] <= 0) {
+			    $lunch[$day]['limit'] = 0;
+			    $lunch[$day]['disabled'] = true;
+	        }
+	        
 	        $lunchPreparations = $lunch_row->related("lunch_preparation")
 	                                       ->order('position');
 	                           

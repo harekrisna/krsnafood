@@ -22,22 +22,28 @@
 			<ul id="left_side">
 				<li><a href="#menu_anchor">menu</a></li>
 			</ul>
-			<div id="logo"><img src="{$basePath}/images/layout/logo-clr.png" /></div>
+			<div id="logo"><img class="logo" src="{$basePath}/images/layout/logo-clr.png" /></div>
 			<ul id="right_side">
-				<li><a href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">Restaurace MALÁ INDIE</a></li>
+				<li><a href="https://www.facebook.com/MAL%C3%81-INDIE-422628081402061" target="_blank>"><img class="facebook-icon" src="{$basePath}/images/layout/facebook-icon.png" /></a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
- 	    <div n:foreach="$flashes as $flash" class="flash">{$flash->message}</div>
-		<div id="title_background"{if $parallax} style="background: none;" data-parallax="scroll" data-bleed="-10" data-image-src="{$basePath}/images/layout/bckgnd-vege.jpg"{/if}>
-			<section id="banner">
-				<span class="rozvoz_obedu">rozvoz obědů</span>
-				<p><span class="first_line">Nabízíme Vám </span>rozvoz zdravých<span class="third_line"> obědů přímo </span>až&nbsp;k&nbsp;Vašim dveřím v&nbsp;lokalitě <span class="fifth_line">Nové&nbsp;Město na Moravě a Žďár nad Sázavou.</span></p>
-				<span class="phone">723 835 095</span>
-				<a href="#menu_anchor" class="order">objednávka</a>
-			</section>
-			<div id="restaurant_info">restaurace <a href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">MALÁ INDIE: Malá 161, NMnM</a><br />otevřeno Po-Pá 11-14h</div>
+		<style>
+			.flash.error {
+				background-color: #ff5656;
+			}
+		</style>
+ 	    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{!$flash->message}</div>
+			<div id="title_background"{if $parallax} style="background: none;" data-parallax="scroll" data-bleed="-10" data-image-src="{$basePath}/images/layout/bckgnd-vege.jpg"{/if}>
+				<section id="banner">
+					<span class="rozvoz_obedu">rozvoz obědů</span>
+					<p><span class="first_line">Nabízíme Vám </span>rozvoz zdravých<span class="third_line"> obědů přímo </span>až&nbsp;k&nbsp;Vašim dveřím v&nbsp;lokalitě <span class="fifth_line">Nové&nbsp;Město na Moravě a Žďár nad Sázavou.</span></p>
+					<span class="phone">723 835 095</span>
+					<a href="#menu_anchor" class="order">objednávka</a>
+				</section>
+				<div id="restaurant_info">restaurace <a href="http://maps.google.com/?q=Malá 161, Nové Město na Moravě" target="_blank>">MALÁ INDIE: Malá 161, NMnM</a><br />otevřeno Po-Pá 11-14h</div>
+				{*<div id="restaurant_info" style="height: 125px; font-size: 25px; width: 520px;"><strong>UPOZORNĚNÍ</strong> - "šéf v Indii"<br /> mezi <strong>15.5 - 2.6.</strong> náhradní telefonní čísla:<br /> rozvoz: 734 447 900 (Eva Walterová)<br />ostatní dotazy: 739 208 709 (Kristýna Badáňová)</div>*}
 			</div>
 		</div>
 		<div id="welcome_background">
@@ -47,7 +53,7 @@
 				<img id="kotva" src="{$basePath}/images/layout/kanai-sig.png" />
 			</section>
 		</div>
-		<div id="menu_background"{if $parallax} style="background: none;" data-parallax="scroll" data-bleed="60" data-image-src="{$basePath}/images/layout/bckgnd-wood-dark.jpg"{/if}>
+		<div id="menu_background"{if $parallax} style="background: none; height: 720px" data-parallax="scroll" data-bleed="60" data-image-src="{$basePath}/images/layout/bckgnd-wood-dark.jpg"{/if}>
 			<div id="menu_anchor"></div>
 			<div id="menu_order_container">
 				<div id="centering">
@@ -101,6 +107,7 @@
 						<li>
 							<table id="order-table" class="order-table">
 			                {foreach $lunch as $day}
+			                	{dump $day}
 				                <tr>
 				                    <td class="day-circle"><div{if $today == $iterator->counter} class="today"{/if}>{$day['abbr']}</div></td>
 				                    <td>
@@ -119,12 +126,13 @@
 				                    {if $day['nocook']}
 				                        <td class="input-arrows"></td>
 				                        <td class="day-count"><span class="closed"></span></td>
-				                    {elseif $day['disabled']}
+					                {elseif $day['disabled']}
 				                        <td class="input-arrows"></td>
 				                        <td class="day-count"><span class="closed">skončeno</span></td>
 				                    {else}
                                         <td class="input-arrows"><div class="arrow-increase"></div><div class="arrow-decrease"></div></td>
 				                        <td class="day-count">
+				                            {*<div style="color: yellow;">zbývá {$day['limit']}</div>*}
 				                            <div>porcí</div>
 				                            <div>(<span>0</span>,- Kč)</div>
 				                        </td>
@@ -177,6 +185,10 @@
 						<div id="return">ZPĚT</div>
 					</div>
 					<div class="footnote">*Objednávku na týž den je možno provést do <span class="bold">8:00 hod</span>. Přijímáme pouze stravenky Sodexo. Cena obědu <span class="bold">90 Kč.</span></div>
+					{*<div class="footnote" style="font-size: 17px; color: yellow">Z kapacitních důvodů budeme v týdnu <span class="bold">12.-16.12.</span> přijímat pouze omezený počet objednávek (obsazenost uvidíte u jednotlivých menu).
+<br />V týdnech od <span class="bold">19.12.</span> až do <span class="bold">1.1.2017</span> bude rozvoz i provoz restaurace pozastaven úplně.
+<br />Děkujeme za pochopení a omlouváme se za případné komplikace.
+<br />Přejeme Vám klidné Vánoce!</div>*}
 					{/form}
 					{*
 					<div style="padding-top: 20px;color: #FFFFFF; box-shadow: -5px 10px 20px 20px rgba(0, 0, 0, 0.5); background-color: rgba(0, 0, 0, 0.5); border-radius: 50px 0 50px 0; height: 450px; margin-top: 50px;">
