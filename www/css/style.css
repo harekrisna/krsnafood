@@ -141,8 +141,8 @@ section#banner {
 #banner p {
 	position: absolute;
 	top: 28px;
-	left: 277px;
-	width: 190px;
+	left: 275px;
+	width: 200px;
 	text-align: center;
 	font-family: Comfortaa;
 	font-size: 18px;
@@ -163,6 +163,12 @@ section#banner {
 
 #banner .fifth_line {
 	font-weight: 500;
+}
+
+#banner .delivery-note {
+	font-size: 16px; 
+	display: block;
+	margin-top: 15px;	
 }
 
 #banner .phone {
@@ -186,7 +192,7 @@ div#restaurant_info {
 	font-family: 'Lora', serif;
 	border-radius: 20px 0 20px 0;
 	margin: 0 auto;
-	width: 570px;
+	width: 480px;
 	height: 55px;
 	background-color: #E64723;
 	color: #FFFFFF;
@@ -868,7 +874,8 @@ div#return {
 
 div.footnote {
     color: #FFFFFF;
-    font-size: 15px;
+	font-size: 19px;
+    font-weight: bold;
     clear: both;
     text-align: left;
     margin-top: 5px;
